@@ -2,35 +2,25 @@ basePath: /api
 consumes:
 - application/json
 definitions:
-  CreateTasksPayload:
+  TaskPayload:
     example:
-      title: my task
-    properties:
-      title:
-        description: タスクのタイトル
-        example: my task
-        type: string
-    required:
-    - title
-    title: CreateTasksPayload
-    type: object
-  UpdateTasksPayload:
-    example:
-      done: true
-      title: my task
+      done: false
+      title: example task title
     properties:
       done:
+        default: false
         description: タスクの完了状態
-        example: true
+        example: false
         type: boolean
       title:
         description: タスクのタイトル
-        example: my task
+        example: example task title
+        maxLength: 128
+        minLength: 2
         type: string
     required:
     - title
-    - done
-    title: UpdateTasksPayload
+    title: TaskPayload
     type: object
   X-Learning-Goa:
     description: タスク (default view)
@@ -153,7 +143,7 @@ paths:
         name: payload
         required: true
         schema:
-          $ref: '#/definitions/CreateTasksPayload'
+          $ref: '#/definitions/TaskPayload'
       produces:
       - application/vnd.goa.error
       responses:
@@ -240,7 +230,7 @@ paths:
         name: payload
         required: true
         schema:
-          $ref: '#/definitions/UpdateTasksPayload'
+          $ref: '#/definitions/TaskPayload'
       produces:
       - application/vnd.goa.error
       responses:

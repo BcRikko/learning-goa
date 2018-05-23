@@ -2,6 +2,7 @@ package resources
 
 import (
 	"github.com/BcRikko/learning-goa/design/mediatypes"
+	"github.com/BcRikko/learning-goa/design/usertypes"
 	goa "github.com/goadesign/goa/design"
 	dsl "github.com/goadesign/goa/design/apidsl"
 )
@@ -33,10 +34,7 @@ var _ = dsl.Resource("Tasks", func() {
 	dsl.Action("create", func() {
 		dsl.Routing(dsl.POST(""))
 		dsl.Description("タスクを作成する。")
-		dsl.Payload(func() {
-			dsl.Member("title", goa.String, "タスクのタイトル")
-			dsl.Required("title")
-		})
+		dsl.Payload(usertypes.TaskPayload)
 		dsl.Response(goa.Created, "/tasks/[0-9]+")
 		dsl.Response(goa.BadRequest, goa.ErrorMedia)
 	})
@@ -48,11 +46,7 @@ var _ = dsl.Resource("Tasks", func() {
 		dsl.Params(func() {
 			dsl.Param("taskID", goa.Integer, "タスクID")
 		})
-		dsl.Payload(func() {
-			dsl.Member("title", goa.String, "タスクのタイトル")
-			dsl.Member("done", goa.Boolean, "タスクの完了状態")
-			dsl.Required("title", "done")
-		})
+		dsl.Payload(usertypes.TaskPayload)
 		dsl.Response(goa.NoContent)
 		dsl.Response(goa.NotFound)
 		dsl.Response(goa.BadRequest, goa.ErrorMedia)
