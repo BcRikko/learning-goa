@@ -21,9 +21,10 @@ func NewTasksController(service *goa.Service) *TasksController {
 func (c *TasksController) Create(ctx *app.CreateTasksContext) error {
 	// TasksController_Create: start_implement
 
-	// Put your logic here
+	ctx.ResponseData.Header().Set("Location", app.TasksHref(999))
 
-	return nil
+	return ctx.Created()
+
 	// TasksController_Create: end_implement
 }
 
@@ -31,9 +32,8 @@ func (c *TasksController) Create(ctx *app.CreateTasksContext) error {
 func (c *TasksController) Delete(ctx *app.DeleteTasksContext) error {
 	// TasksController_Delete: start_implement
 
-	// Put your logic here
+	return ctx.NoContent()
 
-	return nil
 	// TasksController_Delete: end_implement
 }
 
@@ -41,10 +41,32 @@ func (c *TasksController) Delete(ctx *app.DeleteTasksContext) error {
 func (c *TasksController) List(ctx *app.ListTasksContext) error {
 	// TasksController_List: start_implement
 
-	// Put your logic here
+	res := app.XLearningGoaCollection{
+		{
+			ID:        1,
+			Title:     "task1",
+			Done:      false,
+			CreatedAt: time.Now(),
+			UpdatedAt: time.Now(),
+		},
+		{
+			ID:        2,
+			Title:     "task2",
+			Done:      false,
+			CreatedAt: time.Now(),
+			UpdatedAt: time.Now(),
+		},
+		{
+			ID:        3,
+			Title:     "task3",
+			Done:      true,
+			CreatedAt: time.Now(),
+			UpdatedAt: time.Now(),
+		},
+	}
 
-	res := app.XLearningGoaCollection{}
 	return ctx.OK(res)
+
 	// TasksController_List: end_implement
 }
 
@@ -72,8 +94,7 @@ func (c *TasksController) Show(ctx *app.ShowTasksContext) error {
 func (c *TasksController) Update(ctx *app.UpdateTasksContext) error {
 	// TasksController_Update: start_implement
 
-	// Put your logic here
+	return ctx.NoContent()
 
-	return nil
 	// TasksController_Update: end_implement
 }
