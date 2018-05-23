@@ -1,6 +1,8 @@
 package main
 
 import (
+	"time"
+
 	"github.com/BcRikko/learning-goa/app"
 	"github.com/goadesign/goa"
 )
@@ -50,10 +52,19 @@ func (c *TasksController) List(ctx *app.ListTasksContext) error {
 func (c *TasksController) Show(ctx *app.ShowTasksContext) error {
 	// TasksController_Show: start_implement
 
-	// Put your logic here
+	if ctx.TaskID == 0 {
+		return ctx.NotFound()
+	}
 
-	res := &app.XLearningGoa{}
+	res := &app.XLearningGoa{
+		ID:        ctx.TaskID,
+		Title:     "example task title",
+		Done:      false,
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+	}
 	return ctx.OK(res)
+
 	// TasksController_Show: end_implement
 }
 
