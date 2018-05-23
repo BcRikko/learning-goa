@@ -28,7 +28,7 @@ var Task = dsl.MediaType("application/x-learning-goa+json", func() {
 		dsl.Attribute("id")
 		dsl.Attribute("title")
 		dsl.Attribute("done")
-		dsl.Attribute("created_ta")
+		dsl.Attribute("created_at")
 		dsl.Attribute("updated_at")
 	})
 })

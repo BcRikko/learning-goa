@@ -7,8 +7,8 @@ import (
 )
 
 var _ = dsl.Resource("Tasks", func() {
-	DefaultMedia(mediatypes.Task)
-	BasePath("/tasks")
+	dsl.DefaultMedia(mediatypes.Task)
+	dsl.BasePath("/tasks")
 
 	// GET http://localhost:8080/api/tasks
 	dsl.Action("list", func() {
